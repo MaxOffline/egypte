@@ -1,0 +1,258 @@
+html{
+    margin: 0;
+    padding: 0;
+
+
+}
+body{
+
+    padding: 0;
+    background: #fff;
+    margin: 0;
+
+}
+
+a:visited{
+    text-decoration: none;
+    color:#000;
+
+
+}
+.clear{
+    clear: both;
+
+
+
+}
+
+
+.left-div .main-img img{
+    width: 180px;
+    height: 143px;
+    padding-top: 25px;
+    margin-left: 25%;
+    margin-right: 25%;
+
+
+
+
+
+}
+
+.main-img{
+    text-align: center;
+    margin-top: -100px;
+
+
+}
+
+
+
+
+
+
+
+.left-div p{
+    font-style: italic;
+    color:#022f62;
+    font-size: 18px;
+    text-align: center;
+
+
+
+}
+.top-right{
+    float:left;
+    background-color: #fff;
+    width:85%;
+    position: fixed;
+    margin-left:25px;
+
+
+
+
+
+
+}
+
+.top-right img{
+    width:3%;
+    height:40%;
+    margin-right:26px;
+    margin-top:3px;
+    float: right;
+
+}
+
+.profile{
+    float:right;
+
+
+
+}
+
+
+
+.left-div {
+    padding-top:100px;
+    width:15%;
+    background-color: #fff;
+    float:left;
+    height: 1000px;
+    box-shadow: -4px -10px 27px #022f6278;
+    box-sizing: border-box;
+    position: fixed;
+
+
+}
+
+.nav{
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: none;
+
+
+
+
+}
+.nav a{
+    text-decoration: none;
+    text-align: center;
+    font-size:24px;
+    color:#000;
+    font-style: italic;
+    font-family: serif;
+
+
+
+}
+.nav-top{
+    background-color: #fff;
+    border: none;
+    margin-right:15px;
+    margin-top:9px;
+
+}
+
+
+.nav-top a{
+    text-decoration: none;
+    text-align: center;
+    font-size:24px;
+    color:#000;
+    font-style: italic;
+    font-family: serif;
+
+
+
+}
+.nav-top-left{
+    margin-left: 26px;
+
+
+}
+
+.nav-top a:hover{
+    color:#900;
+    font-size: 32px;
+
+
+}
+
+
+
+.nav a:hover{
+    color:#900;
+    font-size: 32px;
+
+
+}
+#first-nav{
+    margin-top: 100px;
+
+
+
+}
+
+
+
+
+.page-content{
+
+
+    width:85%;
+    background-color:#fff;
+    float:right;
+    box-sizing: border-box;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.block-content{
+    margin-top: 213px;
+    text-align: center;;
+
+}
+
+.product{
+    float: left;
+    width: 20%;
+
+}
+
+
+
+
+.product img{
+    width: 249px;
+    margin-right: 10px;
+
+
+
+}
+
+.main-img{
+    width:85%;
+    text-align: center;
+
+}
+
+.products{
+    margin-top: 50px;
+
+
+}
+
+.product-show img{
+
+    width: 249px;
+    margin-right: 10px;
+
+
+
+
+
+
+}
+.product-show a{
+    display: inline;
+    float: left;
+
+
+
+
+
+
+}

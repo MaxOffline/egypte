@@ -1,0 +1,43 @@
+{%extends "egytemp/base.html"%}
+
+
+
+
+
+{%block body%}
+
+    <div class="product">
+        <img src="{{product.productimage1.url}}" alt="{{product.productname}}">
+        <p>{{product.productname}}<br><b>$24.99</b></p>
+
+
+<form action="{% url "product:add" %}" method="post">
+{%csrf_token%}
+
+
+<select  name="count">
+{%for i in "xxxxxxxxxx"%}
+<option value="{{forloop.counter}}">{{forloop.counter}}</option>
+{%endfor%}
+</select>
+
+
+
+
+<input type="hidden" value="{{product.productimage1.url}}" name="productimage" >
+<input type="hidden" value="{{product.productname}}"       name="productname" >
+<input type="hidden" value="{{product.currentuser}}"       name="currentuser" >
+<input type="hidden" value="{{product.productadded}}"      name="productadded">
+<input type="hidden" value="{{product.productcategory}}"   name="productcategory">
+<input type="hidden" value="{{product.id}}"                name="productid">
+<input type="submit" value="Add to cart">
+</form>
+
+
+
+
+
+
+</div>
+
+{%endblock%}

@@ -1,0 +1,61 @@
+{%extends "egytemp/base.html"%}
+
+
+
+
+{%block body%}
+
+
+<div class="product">
+{%if user.is_authenticated%}
+{%for i in cartitems %}
+<form  action="{% url 'product:summary' %}" method="post">
+    {%csrf_token%}
+
+    <br><input type= "text" name="quantity" value="{{i.stock}}">
+<img src="{{i.productimage1}}" alt="{{i.productname}}">
+<p>{{i.productname}}</p>
+
+<input type="hidden" value="{{i.productname }}"     name="productname" >
+<input type="hidden" value="{{i.productcategory}}"  name="productcategory"   >
+<input type="hidden" value="{{i.id}}"  name="id"   >
+<input type="submit" name="Submit" value="Delete">
+{%endfor%}
+
+{%if cartitems%}
+<br><input type="submit" name = "Submit"  value="Submit Order">
+{%endif%}
+
+</form>
+
+
+{%else%}
+
+
+
+
+{%for i in sessionItems %}
+
+<form  action="{% url 'product:summary' %}" method="post">
+    {%csrf_token%}
+    <img src="{{i.productimage1}}" alt="{{i.productname}}" >
+    <br><input type= "text" name="quantity" value="{{i.stock}}">
+
+    <p>{{i.productname}}</p>
+
+<input type="hidden" value="{{i.productname }}"     name="productname" >
+<input type="hidden" value="{{i.productcategory}}"  name="productcategory"   >
+<input type="hidden" value="{{i.id}}"  name="id"   >
+
+{%endfor%}
+{%if sessionItems%}
+<input type="submit" name="Submit" value="Delete">
+{%endif%}
+<!-- <input type="Submit"  value="Submit Order"> -->
+</form>
+
+
+
+{%endif%}
+</div>
+{%endblock%}

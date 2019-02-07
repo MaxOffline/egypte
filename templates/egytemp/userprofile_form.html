@@ -1,0 +1,20 @@
+
+{%extends "egytemp/base.html"%}
+{%load staticfiles%}
+{%block body%}
+<br><br><br><br>
+
+<img src="{{user.userprofile.profilepicture.url}}" alt="Profile picture" width = "80px" height = "80px" >
+
+<form  method="post" enctype = "multipart/form-data">
+
+{%csrf_token%}
+
+
+{%for i in form%}
+{{i.label_tag}}
+{{i}}<br><br>
+{%endfor%}
+<input type="submit"  value="Save">
+</form>
+{%endblock%}

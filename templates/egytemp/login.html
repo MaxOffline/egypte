@@ -1,0 +1,18 @@
+{%extends "egytemp/base.html"%}
+
+
+{%block body%}
+
+{{error}}
+
+<form action="{% url 'login:login' %}" method="post">
+    {% csrf_token %}
+    <label for="username"></label>
+    <label for="password"></label>
+    <input type="text" name="username" value="username">
+    <input type="password" name="password" value="password">
+    <input type="Submit"  value="Login">
+
+
+</form>
+{%endblock%}
