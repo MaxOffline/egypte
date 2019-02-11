@@ -1,22 +1,22 @@
-                        {%extends "egytemp/base.html"%}
+{%extends "egytemp/base.html"%}
+{%block body%}
 
 
-
-                        {%block body%}
-
-
-                        {%for i in product%}
-<div class="all-products">
-
+{%for i in product%}
+    
     <div class="product">
-        <a href="{% url 'product:item' i.id %}"><img src="{{i.productimage1.url}}"
-                                 alt="{{i.productname}}"></a>
-        <p>{{i.productname}}<br><b>$24.99</b></p>
+        
+        <a href="{% url 'product:item' i.id %}">
+            <img    src="{{i.productimage1.url}}"
+                    alt="{{i.productname}}" id={{i.id}}
+                    >
+        </a>
+        
+        <a href="{% url 'product:item' i.id %}">
+           <p>{{i.productname}}<br><b>$24.99</b></p>
+        </a>
+        
     </div>
-
-</div>
-
-
-
-                        {%endfor%}
-                        {%endblock%}
+           
+{%endfor%}
+{%endblock%}

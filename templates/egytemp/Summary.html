@@ -1,19 +1,14 @@
-
 {%extends "egytemp/base.html"%}
-
-
-
 {%block body%}
 
-<p><em>This is Hossam Mohamed, It's just a test. Please let me know if you got it</em> </p>
+<p><em>Order Summary</em> </p>
 
 
 {%for i in items%}
-{{i.stock}}
-{{i.productname}}
+    
+    <img src="{{i.productimage1}}" width="80px" height="80px"><br>
+    {{i.stock}}
+    {{i.productname}}
+
 {%endfor%}
-
-
-
-
 {%endblock%}

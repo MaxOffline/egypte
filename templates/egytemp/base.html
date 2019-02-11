@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
     <!-- <link rel="stylesheet" type="text/css" href="/static/styles.css"> -->
-
+    <script src="/static/script.js"></script>
     <title>Egypte</title>
 </head>
 
@@ -18,7 +18,7 @@
 
 <!-- Left-div -->
     <div class="left-div">
-        <div class="main-img">
+        <div class="logo-img">
             <a href="{%url 'index'%}"><img src="/media/bedding/scarab.png"></a>
         </div>
 
@@ -26,7 +26,7 @@
         <p>Welcome {{request.user.userprofile.firstname}}</p>
         {%endif%}
         <button id="first-nav" class="nav"><a href="{% url 'product:antique'  %}" >Antiques</a></button>
-        <button  class="nav"><a href="{% url 'product:bedding'  %}" >Bedding</a></button>
+        <button  class="nav"><a href="{% url 'product:bedding'  %}" >Bed & Bath</a></button>
 
         <button class="nav"><a href="{%url "product:show" %}" >Cart</a></button>
     </div>
@@ -40,15 +40,14 @@
 <div  class="page-content">
     <div class="top-right">
 
+
         <a href="{%url 'product:show' %}" ><img src="/media/bedding/Cart.png" alt=""></a>
-        {%if not user.userprofile.user%}
-        {%if user.is_authenticated%}
-        <button class="nav-top profile"><a href="{%url "login:addprofile" %}" >Profile </a></button>
+        {% if user.is_authenticated%} {%if not user.userprofile%}
+        <button class="nav-top-right"><a href="{%url "login:addprofile" %}" > Profile </a></button>
         {%endif%}{%endif%}
-        {%if user.userprofile.user%}{%if user.is_authenticated%}
-        <button class="nav-top profile"><a href="{%url "login:updateprofile" user.userprofile.id %}"
-                   >Update Profile </a></button>
-                  {%endif%}{%endif%}
+        {% if user.is_authenticated%} {%if user.userprofile%}
+        <button class="nav-top-right"><a href="{%url "login:updateprofile" user.id %}" > Profile </a></button>
+        {%endif%}{%endif%}
         <div class="nav-top-left">
             {%if not user.is_authenticated%}
             <button class="nav-top"><a href="{%url "login:login" %}" > Login </a></button>
@@ -56,6 +55,7 @@
 
             {%if user.is_authenticated%}
             <button class="nav-top"><a href="{%url "login:logout" %}" > Logout </a></button>
+            
             {%endif%}
             {%if not user.is_authenticated%}
             <button class="nav-top"><a href="{%url "login:register" %}" >Register</a></button>

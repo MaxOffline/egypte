@@ -1,20 +1,25 @@
-
 {%extends "egytemp/base.html"%}
-{%load staticfiles%}
 {%block body%}
-<br><br><br><br>
-
-<img src="{{user.userprofile.profilepicture.url}}" alt="Profile picture" width = "80px" height = "80px" >
-
-<form  method="post" enctype = "multipart/form-data">
-
-{%csrf_token%}
 
 
-{%for i in form%}
-{{i.label_tag}}
-{{i}}<br><br>
-{%endfor%}
-<input type="submit"  value="Save">
-</form>
+<div class="reg-form">
+    <form  method="post" enctype = "multipart/form-data">
+        {%csrf_token%}   
+        
+            {%for i in form%}
+                <div class="reg-form-inputs">
+                    <label>{{i.label}}</label>
+                        {{i}}
+                </div>        
+            {%endfor%}
+        
+        <div class="clear"></div>
+        
+        <div class="submit-div">
+            <input type="submit"  value="Save">
+        </div>  
+        
+    </form>
+</div>
+
 {%endblock%}

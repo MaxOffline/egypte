@@ -1,23 +1,28 @@
-
 {%extends "egytemp/base.html"%}
-
-
-
 {%block body%}
-
-
 {{registered}}<br>
 {{passwordmatch}}<br>
 {{emailmatch}}<br>
 
 
 
-
-<form action="{% url 'login:register' %}" method="post">
-    {%csrf_token%}
-    {{form.as_p}}
-
-
-    <input type="Submit"  value="Register">
-</form>
+<div class="reg-form">
+    <form action="{% url 'login:register' %}" method="post">
+        {%csrf_token%}
+        
+            {%for i in form%}
+                <div class="reg-form-inputs">
+                    <label> {{i.label}}</label>
+                    {{i}}
+                </div>
+            {%endfor%}
+        
+        <div class="clear"></div>
+        
+        <div class="submit-div">
+            <input type="Submit"  value="Register">
+        </div>
+        
+    </form>
+</div>
 {%endblock%}
