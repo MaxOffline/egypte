@@ -7,9 +7,8 @@
     <div class="product">
         
         <a href="{% url 'product:item' i.id %}">
-            <img    src="{{i.productimage1.url}}"
-                    alt="{{i.productname}}" id={{i.id}}
-                    >
+            <img    src="{{i.productimage1}}"
+                    alt="{{i.productname}}" id={{i.id}}>
         </a>
         
         <a href="{% url 'product:item' i.id %}">

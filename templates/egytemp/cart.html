@@ -1,61 +1,58 @@
 {%extends "egytemp/base.html"%}
-
-
-
-
 {%block body%}
 
-
-<div class="product">
 {%if user.is_authenticated%}
-{%for i in cartitems %}
-<form  action="{% url 'product:summary' %}" method="post">
-    {%csrf_token%}
+    {%for i in cartitems %}
+        <div class="cart-product">
+            <form  action="{% url 'product:summary' %}" method="post">
+                {%csrf_token%}
+                <img src="{{i.productimage1}}" alt="{{i.productname}}">
+                <p>{{i.productname}}</p>
+                <input type= "text" name="quantity" value="{{i.stock}}"><br/>
+                <input type="submit" name="Submit" value="Delete">
+                <input type="hidden" value="{{i.productname }}"     name="productname">
+                <input type="hidden" value="{{i.productcategory}}"  name="productcategory">
+                <input type="hidden" value="{{i.id}}"  name="id">           
+        </div>
+            
+    {%endfor%}
+                <div class="clear"></div>
+                {%if cartitems%}
+            
+                    <div class="cart-submit">
+                        <input type="submit" name = "Submit"  value="Submit Order">
+                    </div>
 
-    <br><input type= "text" name="quantity" value="{{i.stock}}">
-<img src="{{i.productimage1}}" alt="{{i.productname}}">
-<p>{{i.productname}}</p>
+                {%endif%}
 
-<input type="hidden" value="{{i.productname }}"     name="productname" >
-<input type="hidden" value="{{i.productcategory}}"  name="productcategory"   >
-<input type="hidden" value="{{i.id}}"  name="id"   >
-<input type="submit" name="Submit" value="Delete">
-{%endfor%}
-
-{%if cartitems%}
-<br><input type="submit" name = "Submit"  value="Submit Order">
-{%endif%}
-
-</form>
-
+            </form>
+    
 
 {%else%}
 
 
 
 
-{%for i in sessionItems %}
+    {%for i in sessionItems %}
+        <div class="cart-product">
+            <form  action="{% url 'product:summary' %}" method="post">
+                {%csrf_token%}
+                
+                <img src="{{i.productimage1}}" alt="{{i.productname}}" >
+                <p>{{i.productname}}</p>
+                <input type= "text" name="quantity" value="{{i.stock}}">
+                
+                {%if sessionItems%}
+                    <input type="submit" name="Submit" value="Delete">
+                {%endif%}
 
-<form  action="{% url 'product:summary' %}" method="post">
-    {%csrf_token%}
-    <img src="{{i.productimage1}}" alt="{{i.productname}}" >
-    <br><input type= "text" name="quantity" value="{{i.stock}}">
+                <input type="hidden" value="{{i.productname }}"     name="productname" >
+                <input type="hidden" value="{{i.productcategory}}"  name="productcategory">
+                <input type="hidden" value="{{i.id}}"  name="id">
 
-    <p>{{i.productname}}</p>
+        </div>
+    {%endfor%}
+            </form>
 
-<input type="hidden" value="{{i.productname }}"     name="productname" >
-<input type="hidden" value="{{i.productcategory}}"  name="productcategory"   >
-<input type="hidden" value="{{i.id}}"  name="id"   >
-{%if sessionItems%}
-<input type="submit" name="Submit" value="Delete">
 {%endif%}
-{%endfor%}
-
-<!-- <input type="Submit"  value="Submit Order"> -->
-</form>
-
-
-
-{%endif%}
-</div>
 {%endblock%}

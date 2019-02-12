@@ -1,80 +1,116 @@
 <!DOCTYPE html>
 {%load static%}
+
 <html id="body">
 
 <head>
-    <meta charset="UTF-8">
+<!--     <link rel="stylesheet" type="text/css" href="https://s3.us-east-2.amazonaws.com/egypte/styles.css"> -->
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
-    <!-- <link rel="stylesheet" type="text/css" href="/static/styles.css"> -->
-    <script src="/static/script.js"></script>
+    <script src="https://s3.us-east-2.amazonaws.com/egypte/script.js"></script>
+    <meta charset="UTF-8">
     <title>Egypte</title>
 </head>
 
 
 <body >
 
-<div class="Container">
+    <div class="Container">
 
 
-<!-- Left-div -->
-    <div class="left-div">
-        <div class="logo-img">
-            <a href="{%url 'index'%}"><img src="/media/bedding/scarab.png"></a>
-        </div>
+    <!-- Left-div -->
+        <div class="left-div">
 
-        {%if user.is_authenticated%}
-        <p>Welcome {{request.user.userprofile.firstname}}</p>
-        {%endif%}
-        <button id="first-nav" class="nav"><a href="{% url 'product:antique'  %}" >Antiques</a></button>
-        <button  class="nav"><a href="{% url 'product:bedding'  %}" >Bed & Bath</a></button>
-
-        <button class="nav"><a href="{%url "product:show" %}" >Cart</a></button>
-    </div>
-
-
-
-
-
-<!-- Page content -->
-
-<div  class="page-content">
-    <div class="top-right">
-
-
-        <a href="{%url 'product:show' %}" ><img src="/media/bedding/Cart.png" alt=""></a>
-        {% if user.is_authenticated%} {%if not user.userprofile%}
-        <button class="nav-top-right"><a href="{%url "login:addprofile" %}" > Profile </a></button>
-        {%endif%}{%endif%}
-        {% if user.is_authenticated%} {%if user.userprofile%}
-        <button class="nav-top-right"><a href="{%url "login:updateprofile" user.id %}" > Profile </a></button>
-        {%endif%}{%endif%}
-        <div class="nav-top-left">
-            {%if not user.is_authenticated%}
-            <button class="nav-top"><a href="{%url "login:login" %}" > Login </a></button>
-            {%endif%}
+            <div class="logo-img">
+                
+                <a href="{%url 'index'%}">
+                    <img src="https://s3.us-east-2.amazonaws.com/egypte/scarab.png">
+                </a>
+                
+            </div>
 
             {%if user.is_authenticated%}
-            <button class="nav-top"><a href="{%url "login:logout" %}" > Logout </a></button>
-            
-            {%endif%}
-            {%if not user.is_authenticated%}
-            <button class="nav-top"><a href="{%url "login:register" %}" >Register</a></button>
+                <p>Welcome {{request.user.userprofile.firstname}}</p>
             {%endif%}
 
+            <button id="first-nav" class="nav">
+                <a href="{% url 'product:antique'  %}" >Antiques</a>
+            </button>
+
+            <button  class="nav">
+                <a href="{% url 'product:bedding'  %}" >Bed & Bath</a>
+            </button>
+
+            <button class="nav">
+                <a href="{%url "product:show" %}" >Cart</a>
+            </button>
 
         </div>
 
+        
 
 
+
+    <!-- Page content -->
+
+        <div  class="right-div">
+            <div class="nav-top-main">
+                <div class="right-div-top-left">
+
+                        {%if not user.is_authenticated%}
+                            <button class="nav-top-left">
+                                <a href="{%url "login:login" %}" > Login </a>
+                            </button>
+                        {%endif%}
+
+                        {%if user.is_authenticated%}
+                            <button class="nav-top-left">
+                                <a href="{%url "login:logout" %}" > Logout </a>
+                            </button>
+                        {%endif%}
+
+                        {%if not user.is_authenticated%}
+                            <button class="nav-top-left">
+                                <a href="{%url "login:register" %}" >Register</a>
+                            </button>
+                        {%endif%}
+
+                </div>
+                
+                <div class="right-div-top-right">
+
+                    <a href="{%url 'product:show' %}" >
+                        <img src="/media/bedding/Cart.png" alt="">
+                    </a>
+
+                    {% if user.is_authenticated%}
+                        {%if not user.userprofile%}
+                            <button class="nav-top-right">
+                                <a href="{%url "login:addprofile" %}" > Profile </a>
+                            </button>
+                        {%endif%}
+                    {%endif%}
+
+                    {% if user.is_authenticated%}
+                        {%if user.userprofile%}
+                            <button class="nav-top-right">
+                                <a href="{%url "login:updateprofile" user.id %}" > Profile </a>
+                            </button>
+                        {%endif%}
+                    {%endif%}
+
+                    </div>
+
+                    
+                </div>
+            <div class="clear"></div>
+            <div class="block-content">
+                
+                {%block body%}
+                {%endblock%}
+                
+            </div>
+        </div>
     </div>
-    <div class="block-content">
-        {%block body%}
-
-        {%endblock%}
-    </div>
-
-</div>
-</div>
 
 
 <script src="/static/script.js"></script>

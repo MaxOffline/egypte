@@ -26,7 +26,7 @@ SECRET_KEY = 'u!3+u086fv76jq18yo95$)e33(a_m#!t=klbd$vd2z_9(pcuqw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["egypte.cpfcacfghn.us-west-2.elasticbeanstalk.com",]
+ALLOWED_HOSTS = ["egypte.cpfcacfghn.us-west-2.elasticbeanstalk.com",'127.0.0.1']
 
 
 # Application definition
@@ -133,7 +133,7 @@ MEDIA_URL = '/media/'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = "maxoffline2@gmail.com"
+EMAIL_HOST_USER = "youremail@gmail.com"
 EMAIL_HOST_PASSWORD = "PUT YOUR PASSWORD HERE"
 EMAIL_PORT = 587
 ACCOUNT_EMAIL_VERIFICATION = 'none'

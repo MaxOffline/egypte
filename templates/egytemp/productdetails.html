@@ -9,7 +9,7 @@
     <img    id = {{product.id}}
             onclick="changeSizeOfPic(this.id)"
             onmouseout="originalSize(this.id)"
-            src="{{product.productimage1.url}}" alt="{{product.productname}}">
+            src="{{product.productimage1}}" alt="{{product.productname}}">
     
     <p>{{product.productname}}<br><b>$24.99</b></p>
 
@@ -22,7 +22,7 @@
             {%endfor%}
         </select>
 
-        <input type="hidden" value="{{product.productimage1.url}}" name="productimage" >
+        <input type="hidden" value="{{product.productimage1}}"     name="productimage" >
         <input type="hidden" value="{{product.productname}}"       name="productname" >
         <input type="hidden" value="{{product.currentuser}}"       name="currentuser" >
         <input type="hidden" value="{{product.productadded}}"      name="productadded">

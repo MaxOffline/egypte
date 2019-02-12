@@ -29,7 +29,6 @@ class index(View):
 
 # Beddingcatrgory
 class beddingCatrgory(View):
-    
     model = product.objects.filter(
                                 productcategory = "bedding",
                                 creator         = "Maxoffline",

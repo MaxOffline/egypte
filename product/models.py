@@ -26,28 +26,28 @@ class product(models.Model):
                         max_length = 50,
                         blank = True
                         )
-    productimage1    = models.ImageField(
-                        upload_to = "bedding/",
+    productimage1    = models.CharField(
+                        max_length = 100,
                         blank = True
                         )
-    productimage2    = models.ImageField(
-                        upload_to = "bedding/",
+    productimage2    = models.CharField(
+                        max_length = 100,
                         blank = True
                         )
-    productimage3    = models.ImageField(
-                        upload_to = "bedding/",
+    productimage3    = models.CharField(
+                        max_length = 100,
                         blank = True
                         )
-    productimage4    = models.ImageField(
-                        upload_to = "bedding/",
+    productimage4    = models.CharField(
+                        max_length = 100,
                         blank = True
                         )
-    productimage5    = models.ImageField(
-                        upload_to = "bedding/",
+    productimage5    = models.CharField(
+                        max_length = 100,
                         blank = True
                         )
-    productimage6    = models.ImageField(
-                        upload_to = "bedding/",
+    productimage6    = models.CharField(
+                        max_length = 100,
                         blank = True
                         )
     productadded     = models.BooleanField(
@@ -60,8 +60,7 @@ class product(models.Model):
                         default = False
                         )
     stock            = models.IntegerField(
-                        blank = True,
-                        null = True
+                        default = 0
                         )
     orderedTime      = models.CharField(
                         max_length = 50,
@@ -73,4 +72,4 @@ class product(models.Model):
                         )
     
     def __str__(self):
-        return(str(self.currentuser))
+        return(str(self.currentuser)+"---"+self.productname)
