@@ -1,1 +1,1 @@
-web: gunicorn egypte.wsgi
+web: gunicorn Egypt.wsgi
