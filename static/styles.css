@@ -230,11 +230,12 @@ a:visited{
 .product img{
     width: 249px;
     border: 2px solid #aeafb152;
-    max-height: 317px;
-    min-height: 317px;
+    max-height: 226px;
+    min-height: 226px;
     margin: auto;
+    max-width: 210px;
+    min-width: 210px;
 }
-
 /*Profile settings*/
 
 
