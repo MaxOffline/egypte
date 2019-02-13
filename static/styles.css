@@ -27,8 +27,8 @@ a:visited{
 
 /*Left navigation bar*/
 .left-div {
-    padding-top:20px;
-    width:15%;
+    padding-top:0;
+    width:10%;
     background-color: #fff;
     float:left;
     height: 1000px;
@@ -41,9 +41,8 @@ a:visited{
 }
 
 .left-div .logo-img img{
-    width: 180px;
     height: 143px;
-    padding-top: 25px;
+
 }
 
 .left-div p{
@@ -212,14 +211,15 @@ a:visited{
 }
 
 .product input{
-    
-    border: 2px solid darkred;
     background-color: darkred;
     border-radius: 15px;
     width: 171px;
     height: 30px;
     font-style: italic;
     color: white;  
+}
+.product input:hover{
+    background-color: black;
 }
 
 .product select{
@@ -229,12 +229,11 @@ a:visited{
 
 .product img{
     width: 249px;
-    border: 2px solid #aeafb152;
     max-height: 226px;
     min-height: 226px;
     margin: auto;
-    max-width: 210px;
-    min-width: 210px;
+    max-width: 192px;
+    min-width: 192px;
 }
 /*Profile settings*/
 
@@ -257,7 +256,6 @@ a:visited{
     text-align: center;
     margin-bottom: 10px;
     border-radius: 13px;
-    border: 2px solid #844a4b94;
     font-style: italic;
     font-size: 18px;
     float: left;
@@ -271,7 +269,7 @@ a:visited{
 .submit-div{
     margin-top: 30px;
     text-align: center;
-    width: 859px;
+    width: 790px;
 }
 
 .submit-div input{
@@ -284,7 +282,6 @@ a:visited{
 }
 
 .submit-div input:hover{
-    border: 2px solid black;
     background-color: black;
 }
 
@@ -306,7 +303,6 @@ a:visited{
 }
 .cart-product img{
     width: 249px;
-    border: 2px solid #aeafb152;
     max-height: 154px;
     min-height: 144px;
     min-width: 100px;
@@ -331,13 +327,17 @@ a:visited{
 }
 
 .cart-product input[type=submit]{
-    border: 2px solid darkred;
     background-color: darkred;
     border-radius: 15px;
     color:white;
     font-style: italic;
     width: 70px;
     height: 20px;
+}
+
+.cart-product input[type=submit]{
+    
+    background-color: black;
 }
 .cart-submit{
     float: left;
@@ -346,7 +346,6 @@ a:visited{
 }
 
 .cart-submit input[type=submit]{
-    border: 2px solid darkred;
     background-color: darkred;
     border-radius: 15px;
     color:white;
