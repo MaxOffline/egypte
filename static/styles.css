@@ -246,18 +246,18 @@ a:visited{
 
 .reg-form-inputs label{
     float: left;
-    width: 10%;
+    width: 13%;
     margin: 0;
 }
 
 .reg-form-inputs input{
-    width: 540px;
-    height: 30px;
+    width: 457px;
+    height: 26px;
     margin: 0;
     text-align: center;
     margin-bottom: 10px;
     border-radius: 13px;
-    border: 2px solid #cc3e3f;
+    border: 2px solid #844a4b94;
     font-style: italic;
     font-size: 18px;
     float: left;
@@ -275,8 +275,7 @@ a:visited{
 }
 
 .submit-div input{
-    border: 2px solid darkred;
-    background-color: darkred;
+    background-color: #844a4bd9;
     border-radius: 15px;
     width: 200px;
     height: 30px;
