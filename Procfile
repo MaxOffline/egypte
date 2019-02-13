@@ -1,0 +1,1 @@
+web: gunicorn Egypt.wsgi
