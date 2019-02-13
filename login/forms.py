@@ -10,23 +10,24 @@ class Register(forms.ModelForm):
                                 attrs={'placeholder': "Username"}
                             ))
     password        = forms.CharField(
-                    max_length = 15,
+                    max_length = 25,
                     widget     = forms.PasswordInput(
                                 attrs={'placeholder': "Password"}
                             ))
     ConfirmPassword = forms.CharField(
-                    max_length = 15,
+                    max_length = 25,
 
                     label  = "Confirm Password",
                     widget = forms.PasswordInput(
                             attrs={'placeholder': "Confirm Password"}
                             ))
     email           = forms.CharField(
-                    max_length = 12,
+                    max_length = 25,
                     widget     =  forms.TextInput(
                                 attrs={'placeholder': "Email"}
                             ))
     ConfirmEmail    = forms.CharField(
+                    max_length = 25,
                     label  = "Confirm Email",
                     widget =  forms.TextInput(
                             attrs={'placeholder': "Confirm Email"}
