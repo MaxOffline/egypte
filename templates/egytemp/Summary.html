@@ -5,10 +5,10 @@
 
 
 {%for i in items%}
-    
-    <img src="{{i.productimage1}}" width="80px" height="80px"><br>
-    {{i.stock}}
-    {{i.productname}}
-
+    <div class="product">
+        <img src="{{i.productimage1}}" width="80px" height="80px"><br>
+        <p>{{i.stock}}</p>
+        <p>{{i.productname}}</p>
+    </div>     
 {%endfor%}
 {%endblock%}
