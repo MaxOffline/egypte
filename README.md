@@ -17,7 +17,8 @@ Updates to look for are :
 4- Will add responsivenes to different device sizes.
 5- Bootstrap implementation
 6- Cart items count on the cart icon.
-7- Will create some bugs to fix later :D
+7- Contact us page
+8- Will create some bugs to fix later :D
 
 
 
