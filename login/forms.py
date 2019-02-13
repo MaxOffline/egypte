@@ -22,12 +22,12 @@ class Register(forms.ModelForm):
                             attrs={'placeholder': "Confirm Password"}
                             ))
     email           = forms.CharField(
-                    max_length = 25,
+                    max_length = 50,
                     widget     =  forms.TextInput(
                                 attrs={'placeholder': "Email"}
                             ))
     ConfirmEmail    = forms.CharField(
-                    max_length = 25,
+                    max_length = 50,
                     label  = "Confirm Email",
                     widget =  forms.TextInput(
                             attrs={'placeholder': "Confirm Email"}
