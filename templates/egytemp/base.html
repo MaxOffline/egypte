@@ -73,6 +73,14 @@
                                 <a href="{%url "login:register" %}" >Register</a>
                             </button>
                         {%endif%}
+                    
+                        {% if user.is_authenticated%}
+                            {%if not user.userprofile%}
+                                <button class="nav-top-left">
+                                    <a href="{%url "login:addprofile" %}" > Profile </a>
+                                </button>
+                            {%endif%}
+                        {%endif%}
 
                 </div>
                 
@@ -81,14 +89,6 @@
                     <a href="{%url 'product:show' %}" >
                         <img src="https://s3.us-east-2.amazonaws.com/egypte/Cart.png" alt="">
                     </a>
-
-                    {% if user.is_authenticated%}
-                        {%if not user.userprofile%}
-                            <button class="nav-top-right">
-                                <a href="{%url "login:addprofile" %}" > Profile </a>
-                            </button>
-                        {%endif%}
-                    {%endif%}
 
                     {% if user.is_authenticated%}
                         {%if user.userprofile%}
