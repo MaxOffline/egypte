@@ -12,6 +12,8 @@ urlpatterns = [
     path("Summary/", views.Submitted_View.as_view(), name='summary'),
     path("antiques/", views.antiquesCategory.as_view(), name='antique'),
     path('<int:pk>/itemshow/', views.productDetails.as_view(), name = 'item' ),
+    path("upload/", views.upload.as_view(), name='upload'),
+
 
 
 ]

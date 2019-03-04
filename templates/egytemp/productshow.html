@@ -3,19 +3,26 @@
 
 
 {%for i in product%}
-    
-    <div class="product">
-        
-        <a href="{% url 'product:item' i.id %}">
-            <img    src="{{i.productimage1}}"
-                    alt="{{i.productname}}" id={{i.id}}>
-        </a>
-        
-        <a href="{% url 'product:item' i.id %}">
-           <p>{{i.productname}}<br><b>$24.99</b></p>
-        </a>
-        
-    </div>
-           
+    {%if i.productimages_set.all.0.image1%}
+
+        <div class="product">
+
+            <a href="{% url 'product:item' i.id %}">
+
+                <img    src="{{i.productimages_set.all.0.image1.url}}"
+                        alt="{{i.productname}}" id={{i.id}}>
+
+            </a>
+
+            <a href="{% url 'product:item' i.id %}">
+               <p>{{i.productname}}<br><b>$24.99</b></p>
+            </a>
+
+        </div>
+    {%endif%}
+{%endfor%}
+
+{% for image in product.productimages_set.all%}
+{{image.image1}}
 {%endfor%}
 {%endblock%}

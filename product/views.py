@@ -1,4 +1,5 @@
 import datetime
+from PIL import Image
 from django.views import generic
 from django.conf import settings
 from product.models import product
@@ -18,11 +19,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 #This is the mainpage view
 class index(View):
-    
+
     template_name = "egytemp/index.html"
 
     def get(self,request):
-        
+
         return render(request, self.template_name,{})
 
 
@@ -37,14 +38,14 @@ class beddingCatrgory(View):
     template_name = "egytemp/productshow.html"
 
     def get(self,request):
-        
+
         return render(request, self.template_name,{"product":self.model})
 
 
 
 # AntiquesCategory
 class antiquesCategory(View):
-    
+
     # All of the antiques product
     model = product.objects.filter(
                                 productcategory = "antiques",
@@ -52,41 +53,41 @@ class antiquesCategory(View):
                                 )
 
     template_name = "egytemp/productshow.html"
-    
+
     def get(self,request):
-        
+
         return render(request, self.template_name,{"product":self.model})
 
-    
-    
+
+
 
 
 
 class productDetails(generic.DetailView):
-    
+
     model = product
     template_name = "egytemp/productdetails.html"
 
 
 
-    
-    
+
+
 class cartView(View):
-    
+
     template_name = "egytemp/cart.html"
 
     def get(self, request):
-        
+
         # Check if the user is logged in
         if request.user.is_authenticated:
-            
+
             # We will get all the products he added
             findItems = product.objects.filter(
                                             currentuser  = request.user,
                                             productadded = True ,
                                             submitted    = False,
                                             )
-            
+
             return render(
             request, self.template_name, {"cartitems" : findItems}
             )
@@ -94,7 +95,7 @@ class cartView(View):
 
         # If the user is not logged in, We will get all the products he added by the session id
         else:
-            
+
             sessionItems = product.objects.filter(
                                                 sessionkey   = str(request.session.session_key),
                                                 productadded = True,
@@ -133,7 +134,7 @@ class addToCart(View):
         productid       = request.POST["productid"]
         productimage    = request.POST["productimage"]
         quantity        = request.POST["count"]
-        
+
         # Get the total stock of the item
         totalStock      = product.objects.get(
                         productname = productLabel,
@@ -158,7 +159,7 @@ class addToCart(View):
                                     )
 
             for i in findProductsWithSession:
-                
+
                 currentStock = i.stock
 
             # if there are no items with the same session ID
@@ -212,7 +213,7 @@ class addToCart(View):
                                         productimage1 = productimage
                                         )
             else:
-                
+
                 createProduct = product.objects.create(
                                                     productimage1 = productimage,
                                                     currentuser = request.user,
@@ -230,15 +231,15 @@ class addToCart(View):
 
 
 class Submitted_View(View):
-    
+
     template_name = "egytemp/Summary.html"
-    
+
     # We will use this time to get all the items that was submitted lastly.
     now = datetime.datetime.now()
 
-    # get the last item in items that has submitted = True  
+    # get the last item in items that has submitted = True
     def post(self,request):
-        
+
         if request.POST["Submit"] == "Submit Order":
             allproducts = product.objects.filter(
                                                 currentuser=request.user,
@@ -248,12 +249,12 @@ class Submitted_View(View):
                                                 )
 
             for item in allproducts:
-                
+
                 # Get the TOTAL stock of the ORIGINAL ITEM
                 totalStock = product.objects.get(creator = "Maxoffline", productname = item.productname)
 
                 if request.POST["quantity"] != item.stock:
-                    
+
                     updateProduct = allproducts.update(
                                                     stock = int(request.POST["quantity"])
                                                     )
@@ -261,9 +262,9 @@ class Submitted_View(View):
 
                 #if item stock is bigger than the total stock return render message
                 if item.stock > totalStock.stock:
-                    
+
                     return HttpResponse("Sorry, We don't have enough stock of " + item.productname)
-                
+
                 # Get the stock of the items added and deduct them from the OIRIGINAL ITEM TOTAL
                 else:
                     deduct   = product.objects.filter(
@@ -272,15 +273,15 @@ class Submitted_View(View):
                                                     ).update(
                                                             stock = totalStock.stock-int(item.stock)
                                                             )
-                    
+
                     changeLastorder = product.objects.filter(
                                                             currentuser = request.user,
                                                             submitted = True,
                                                             count = 998
                                                             ).update(count = 0)
-                    
-                   
-                    
+
+
+
             # update the cart items to Submitted = True andorderedTime = now.
                     updateItems = product.objects.filter(
                                                     currentuser=request.user,
@@ -291,7 +292,7 @@ class Submitted_View(View):
                                                             orderedTime=self.now,
                                                             count = 998,
                                                             )
-            
+
             # The order Summary items
                     orderSummary = product.objects.filter(
                                                         currentuser=request.user,
@@ -315,7 +316,7 @@ class Submitted_View(View):
                     # msg.send()
 
                     return render(request,self.template_name,{"items":orderSummary})
-        
+
         elif request.POST["Submit"] == "Delete":
 
             if request.user.is_authenticated:
@@ -339,3 +340,85 @@ class Submitted_View(View):
                 return redirect("product:show")
         else:
             return redirect("index")
+
+
+from io import BytesIO
+from django.core.files.storage import default_storage
+from django.core.files.uploadedfile import InMemoryUploadedFile
+class upload(View):
+    def post(self, request):
+        image = request.FILES['pic']
+        #Save the image first to the DB
+        default_storage.save(image.name, image)
+        #Open the file in the DB
+        thisdude = default_storage.open(image.name)
+        #Use the opened file in the DB in Images
+        img = Image.open(thisdude)
+        # Resize that babe
+        img.thumbnail((128, 128), Image.ANTIALIAS)
+        #Get the Bytes of the file from memory
+        thumbnailString = BytesIO()
+        #Save the image with the bytes as JPEG
+        img.save(thumbnailString, format='JPEG')
+        #Get the file in the memory
+        thumb_file = InMemoryUploadedFile(thumbnailString, None, 'foo.jpg', 'image/jpeg',1, None)
+        #Save it to the DB
+        default_storage.save("abc.jpg", thumb_file)
+        return redirect("index")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#My 7 years old typed this so I'm sorry but I'm not deleting it :)
+
+# i remeber years ago someone told me i should take caution when it comes to love
+# i did and you were strong and i was not my illusion my mistake i was careless i
+# forgot i did and now when all is done there is nothing to say you have gone and
+#  so effortlessly you have won you can go ahead tell them tell them all i know now
+#  shout it from the roof tops write it on the sky line all we had is gone now tell
+#  them i was happy and my heart is broken all my scars are open tell them what i
+#  hoped would be impossible impossible impossible impossible
+
+
+
+
+
+
+
+#

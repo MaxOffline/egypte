@@ -16,11 +16,11 @@ from .forms import Register
 
 
 class register(View):
-    
+
     template_name = "egytemp/register.html"
     allUsers = User.objects.all()
     registerationForm = Register
-    
+
     def get(self, request):
         return render(
                     request,
@@ -29,19 +29,22 @@ class register(View):
                     )
 
     def post(self, request):
-        
+
         form = self.registerationForm(request.POST)
 
         if form.is_valid():
-            
+
             user      = form.save(commit = False)
             username  = form.cleaned_data["username"]
             password  = form.cleaned_data["password"]
             password2 = form.cleaned_data["ConfirmPassword"]
             email     = form.cleaned_data["email"]
             email2    = form.cleaned_data["ConfirmEmail"]
-            
-            # Validating inputs 
+#            name = request.POST["firstname"]
+#            last = request.POST["lastname"]
+#            mob = request.POST["mobile"]
+
+            # Validating inputs
             for i in self.allUsers:
                 if i.email == email or i.username == username:
                     return render(request, self.template_name,{"registered":"User is already registered","form":self.registerationForm(None)})
@@ -55,7 +58,7 @@ class register(View):
                     user.set_password(password)
                     user.save()
                     login(request,user)
-                    # createProfile = userProfile.objects.create(user = request.user)
+#                    createProfile = userProfile.objects.create(user = request.user, firstname = name, lastname = last, mobile=mob)
                     return redirect("index")
 
         return render(request,self.template_name,{})
@@ -68,70 +71,70 @@ class register(View):
 
 
 class loginView(View):
-    
+
     template_name = "egytemp/login.html"
-    
+
     def get(self,request):
-        
+
         return render(
                     request,
                     self.template_name,
                     {})
 
     def post(self,request):
-        
+
         #findsession = Session.objects.get(pk = request.session.session_key)
         username    = request.POST["username"]
         password    = request.POST["password"]
         session_key = request.session.session_key
         user        = authenticate(username=username, password=password)
-        
+
         if user is not None :
-            
+
             if user.is_active:
-                
+
                 login(request, user)
-                
+
                 try:
-                    
+
                     # we will search for all the sessions in any product.
                     findsession = product.objects.filter(sessionkey = str(session_key))
-                    
+
                 except Session.DoesNotExist:
-                    
+
                     return redirect("index")
-                
+
                 else:
-                    
+
                     # We will get all the items with the same session id
                     findSession = product.objects.filter(sessionkey = str(session_key))
-                    
-                    
+
+
                     for i in findSession:
-                        
+
                         # Then we will check and see if there is a product with the same name and user
                         check = product.objects.filter(
                                 productname = i.productname,
                                 currentuser = request.user,
                                 submitted = False
                                 )
-                        
+
                         for number in check:
-                            
-                            # If there is an object 
+
+                            # If there is an object
                             if check:
-                                
+
                                 #we will get the stock of that session's item and add it to the #current   #user's item
                                 update = check.update(
                                         stock = int(i.stock) + number.stock
                                         )
-                                
+
                                 # Then we will delete that item with the same session and product name
                                 delete = product.objects.filter(
                                         sessionkey = str(session_key),
                                         productname = i.productname
                                         ).delete()
-                                
+
                     else:
                         #If no items with same session id
                         #Change the username of the session to the current user's username
@@ -151,19 +154,19 @@ class loginView(View):
 
 
 class logoutView(View):
-    
+
     def get(self, request):
-        
+
         logout(request)
         return redirect("index")
 
 
-    
-    
+
+
 
 
 class createProfile(CreateView):
-    
+
     model = userProfile
     success_url = reverse_lazy("index")
     template_name = "egytemp/userprofile_form.html"
@@ -176,8 +179,9 @@ class createProfile(CreateView):
             'city',
             'state',
             'zip',
+            'image',
             ]
-  
+
     #I could replace it by adding ("user" : self.request.user.userprofile.user or self.request.user ) in the #get_initial method
     def form_valid(self, form):
         form.instance.id = self.request.user.id
@@ -189,7 +193,7 @@ class createProfile(CreateView):
 
 
 class updateProfile(UpdateView):
-    
+
     model = userProfile
     success_url = reverse_lazy("index")
     template_name = "egytemp/userprofile_form.html"
@@ -202,11 +206,12 @@ class updateProfile(UpdateView):
             'city',
             'state',
             'zip',
+            'image',
             ]
 
 
     def get_initial(self):
-        
+
      return {
              "zip" : self.request.user.userprofile.zip,
              "city" : self.request.user.userprofile.city,
@@ -215,9 +220,3 @@ class updateProfile(UpdateView):
              "streetAdrress1" : self.request.user.userprofile.streetAdrress1,
              "streetAdrress2" : self.request.user.userprofile.streetAdrress2,
              }
-
-
-
-
-
-

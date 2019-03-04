@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 
 # Bedding products model
 class product(models.Model):
+
     currentuser      = models.CharField(
                         max_length = 50,
                         blank = True
@@ -24,30 +28,6 @@ class product(models.Model):
                         )
     sessionkey       = models.CharField(
                         max_length = 50,
-                        blank = True
-                        )
-    productimage1    = models.CharField(
-                        max_length = 100,
-                        blank = True
-                        )
-    productimage2    = models.CharField(
-                        max_length = 100,
-                        blank = True
-                        )
-    productimage3    = models.CharField(
-                        max_length = 100,
-                        blank = True
-                        )
-    productimage4    = models.CharField(
-                        max_length = 100,
-                        blank = True
-                        )
-    productimage5    = models.CharField(
-                        max_length = 100,
-                        blank = True
-                        )
-    productimage6    = models.CharField(
-                        max_length = 100,
                         blank = True
                         )
     productadded     = models.BooleanField(
@@ -70,6 +50,7 @@ class product(models.Model):
                         blank = True,
                         null = True
                         )
-    
+
+
     def __str__(self):
         return(str(self.currentuser)+"---"+self.productname)

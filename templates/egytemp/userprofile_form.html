@@ -4,22 +4,22 @@
 
 <div class="reg-form">
     <form  method="post" enctype = "multipart/form-data">
-        {%csrf_token%}   
-        
+        {%csrf_token%}
+
             {%for i in form%}
                 <div class="reg-form-inputs">
                     <label>{{i.label}}</label>
                         {{i}}
-                </div>      
+                </div>
                 <div class="clear"></div>
             {%endfor%}
-        
+
         <div class="clear"></div>
-        
+
         <div class="submit-div">
             <input type="submit"  value="Save">
-        </div>  
-        
+        </div>
+
     </form>
 </div>
 

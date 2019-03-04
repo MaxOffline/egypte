@@ -1,7 +1,10 @@
 from django.db import models
 from django import forms
 from django.contrib.auth.models import User
-
+from PIL import Image
+from django.core.files.storage import default_storage as storage
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 class userProfile(models.Model):
     user           = models.OneToOneField(
@@ -55,6 +58,29 @@ class userProfile(models.Model):
                     verbose_name = "ZIP Code",
                     null = True
                     )
+
+    image          = models.ImageField(
+                    upload_to = "Profile_Pix/",
+                    blank=True,
+                    null=True
+                    )
+
+
+
+
+    def save(self, *args, **kwargs):
+        super(userProfile, self).save(*args, **kwargs)
+        previous = userProfile.objects.get(id = self.id)
+        if self.image.width > 128:
+            orig = Image.open(self.image)
+            orig.thumbnail((128,128), Image.ANTIALIAS)
+            fileBytes = BytesIO()
+            orig.save(fileBytes, format="JPEG")
+            memoryFile = InMemoryUploadedFile(fileBytes, None, str(self.user) + "_thumb.JPG", 'image/jpeg',1, None)
+            self.image = memoryFile
+            self.image.save(self.image.name, self.image)
+
+
 
 
     def __str__(self):

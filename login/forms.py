@@ -33,7 +33,6 @@ class Register(forms.ModelForm):
                             attrs={'placeholder': "Confirm Email"}
                             ))
 
-
     class Meta:
 
         model = User
