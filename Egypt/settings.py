@@ -12,22 +12,23 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import django_heroku
+from senstive_info import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMP_DIR = TEMPLATES_DIR = os.path.join(BASE_DIR,"templates")
-STATIC_DIR = os.path.join(BASE_DIR,"static")
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'u!3+u086fv76jq18yo95$)e33(a_m#!t=klbd$vd2z_9(pcuqw'
+SECRET_KEY = KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["egypte.cpfcacfghn.us-west-2.elasticbeanstalk.com",'127.0.0.1']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'product',
     'login',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -122,11 +124,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_DIR = os.path.join(BASE_DIR,"static")
 STATICFILES_DIRS = [
 STATIC_DIR,
 
 ]
+
+
+# AWS Config
+AWS_S3_ACCESS_KEY_ID = KEY_ID
+AWS_S3_SECRET_ACCESS_KEY = ACCESS_KEY
+AWS_STORAGE_BUCKET_NAME = BUCKET_NAME
+#For preventing django from saving ACCESSKEY and other params
+AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#This default variable will prevent your images from being public
+AWS_DEFAULT_ACL = "public-read"
+# Necessary to fix manage.py collectstatic command to only upload changed files instead of all files
+AWS_PRELOAD_METADATA = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
@@ -142,6 +157,3 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-
-
-
