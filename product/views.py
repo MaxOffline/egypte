@@ -13,6 +13,19 @@ from django.contrib.sessions.models import Session
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from product.serializers import ProductSerializer
+
+
+
+class productAPI(APIView):
+    def get(self, request):
+        thisproduct = product.objects.all()
+        productser = ProductSerializer(thisproduct, many=True)
+        return Response(productser.data)
+
 
 
 

@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import django_heroku
-from senstive_info import *
+# import django_heroku
+# from senstive_info import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +23,7 @@ TEMP_DIR = TEMPLATES_DIR = os.path.join(BASE_DIR,"templates")
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = KEY
+SECRET_KEY = "KEY"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'product',
     'login',
     'storages',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -132,9 +133,9 @@ STATIC_DIR,
 
 
 # AWS Config
-AWS_S3_ACCESS_KEY_ID = KEY_ID
-AWS_S3_SECRET_ACCESS_KEY = ACCESS_KEY
-AWS_STORAGE_BUCKET_NAME = BUCKET_NAME
+# AWS_S3_ACCESS_KEY_ID = KEY_ID
+# AWS_S3_SECRET_ACCESS_KEY = ACCESS_KEY
+# AWS_STORAGE_BUCKET_NAME = BUCKET_NAME
 #For preventing django from saving ACCESSKEY and other params
 AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -156,4 +157,4 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

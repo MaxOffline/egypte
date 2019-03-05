@@ -1,5 +1,7 @@
 from django.urls import path, re_path
 from product import views
+from rest_framework.urlpatterns import format_suffix_patterns
+
 
 
 
@@ -13,7 +15,9 @@ urlpatterns = [
     path("antiques/", views.antiquesCategory.as_view(), name='antique'),
     path('<int:pk>/itemshow/', views.productDetails.as_view(), name = 'item' ),
     path("upload/", views.upload.as_view(), name='upload'),
+    path("productApi/", views.productAPI.as_view(), name='productapi'),
 
 
 
 ]
+urlpatterns = format_suffix_patterns(urlpatterns)
